@@ -1,0 +1,38 @@
+OUTPUT_ARCH("riscv")
+
+ENTRY(_start)
+
+MEMORY
+{
+	imem : ORIGIN = 0x80000000, LENGTH = 0x00080000
+	dmem : ORIGIN = 0x80080000, LENGTH = 0x00080000
+}
+
+SECTIONS
+{
+	. = 0x80000000;
+
+	.start . : {
+		*start.o(.text)
+	} > imem
+
+	.text : {
+		*(.text)
+	} > imem
+
+	.rodata : {
+		*(.rodata)
+	} > imem
+
+	.sdata : {
+		*(.sdata)
+	} > imem
+
+	.bss : {
+		*(.bss COMMON)
+	} > imem
+
+	. = ALIGN(4);
+
+	stack_top = . + 0x1000; /* 4kB of stack memory */
+}
