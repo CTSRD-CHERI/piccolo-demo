@@ -6,7 +6,7 @@ This is a Hello World application for GFE P1 Processor (Bluespec Piccolo).
 
 Build 32-bit toolchain: https://github.com/riscv/riscv-gnu-toolchain
 
-    $ export CROSS_COMPILE=/path/to/riscv32-unknown-linux-gnu-
+    $ export CROSS_COMPILE=/path/to/gfe/riscv-tools/bin/riscv32-unknown-elf-
     $ git clone --recursive https://github.com/CTSRD-CHERI/piccolo_demo
     $ cd piccolo_demo
     $ make
