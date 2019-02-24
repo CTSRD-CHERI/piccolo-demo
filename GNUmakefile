@@ -1,4 +1,4 @@
-APP =		piccolo_demo
+APP =		piccolo-demo
 ARCH =		riscv
 
 CC =		${CROSS_COMPILE}gcc
