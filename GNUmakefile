@@ -1,10 +1,6 @@
 APP =		piccolo-demo
 ARCH =		riscv
 
-ifndef CROSS_COMPILE
-$(error Error: CROSS_COMPILE is not set)
-endif
-
 CC =		${CROSS_COMPILE}gcc
 LD =		${CROSS_COMPILE}ld
 OBJCOPY =	${CROSS_COMPILE}objcopy
@@ -34,3 +30,7 @@ clean:	__clean
 
 include osfive/lib/libc/Makefile.inc
 include osfive/mk/gnu.mk
+
+ifndef CROSS_COMPILE
+$(error Error: CROSS_COMPILE is not set)
+endif
