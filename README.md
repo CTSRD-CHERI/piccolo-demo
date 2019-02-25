@@ -11,7 +11,10 @@ Build 32-bit toolchain: https://github.com/riscv/riscv-gnu-toolchain
     $ cd piccolo-demo
     $ make
 
-### Program to VCU118 Evaluation Board:
+### Connect to UART
+    $ cu -l /dev/ttyUSB1 -s 115200
+
+### Program the VCU118 Evaluation Board:
 
     $ /path/to/openocd -f /path/to/gfe/testing/targets/p1_hs2.cfg \
       -c 'halt; load_image /path/to/piccolo-demo.bin 0x80000000; \
