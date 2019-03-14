@@ -28,6 +28,8 @@
 #include <sys/console.h>
 #include <sys/systm.h>
 
+#include <machine/machdep.h>
+
 #include <dev/uart/uart_16550.h>
 
 #define	UART_BASE		0x62300000
@@ -56,9 +58,15 @@ void
 main(void)
 {
 
+	md_init();
+
 	uart_16550_init(&uart_sc, UART_BASE,
 	    UART_CLOCK_RATE, DEFAULT_BAUDRATE);
 	console_register(uart_putchar, (void *)&uart_sc);
+
+	printf("Hello World\n");
+
+	__asm __volatile("ecall");
 
 	while (1)
 		printf("Hello World\n");

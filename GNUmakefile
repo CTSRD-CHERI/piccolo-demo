@@ -9,8 +9,16 @@ LDSCRIPT =	${CURDIR}/ldscript
 
 OBJECTS =	main.o						\
 		osfive/sys/dev/uart/uart_16550.o		\
+		osfive/sys/kern/kern_malloc.o			\
+		osfive/sys/kern/kern_malloc_fl.o		\
+		osfive/sys/kern/kern_panic.o			\
+		osfive/sys/kern/kern_sched.o			\
+		osfive/sys/kern/kern_timeout.o			\
 		osfive/sys/kern/subr_prf.o			\
 		osfive/sys/kern/subr_console.o			\
+		osfive/sys/riscv/riscv/exception.o		\
+		osfive/sys/riscv/riscv/machdep.o		\
+		osfive/sys/riscv/riscv/trap.o			\
 		start.o
 
 LIBRARIES =	LIBC
