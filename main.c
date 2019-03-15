@@ -27,6 +27,8 @@
 #include <sys/cdefs.h>
 #include <sys/console.h>
 #include <sys/systm.h>
+#include <sys/thread.h>
+#include <sys/malloc.h>
 
 #include <machine/cpuregs.h>
 #include <machine/cpufunc.h>
@@ -75,6 +77,17 @@ clear_bss(void)
 		*sbss++ = 0;
 }
 
+static void
+test_thr(void *arg)
+{
+
+	while (1) {
+		critical_enter();
+		printf("Hello from thread %d\n", (int)arg);
+		critical_exit();
+	}
+}
+
 void
 main(void)
 {
@@ -89,14 +102,18 @@ main(void)
 
 	printf("Hello World\n");
 
-	__asm __volatile("ecall");
+	malloc_init();
+	malloc_add_region(0x80040000, 0x40000);
 
 	e300g_clint_init(&clint_sc, CLINT_BASE);
 
+	thread_create("test", 10000, test_thr, (void *)1);
+	thread_create("test", 10000, test_thr, (void *)2);
+
 	intr_enable();
 
-	while (1) {
-		printf("Hello World\n");
-		usleep(1000000);
-	}
+	__asm __volatile("ecall");
+
+	while (1)
+		cpu_idle();
 }
