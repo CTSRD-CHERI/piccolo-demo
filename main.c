@@ -28,15 +28,23 @@
 #include <sys/console.h>
 #include <sys/systm.h>
 
+#include <machine/cpuregs.h>
+#include <machine/cpufunc.h>
 #include <machine/machdep.h>
 
 #include <dev/uart/uart_16550.h>
+#include <riscv/sifive/e300g_clint.h>
 
+#define	CLINT_BASE		0x10000000
 #define	UART_BASE		0x62300000
 #define	UART_CLOCK_RATE		83000000
 #define	DEFAULT_BAUDRATE	115200
 
 static struct uart_16550_softc uart_sc;
+static struct clint_softc clint_sc;
+
+extern uint32_t _sbss;
+extern uint32_t _ebss;
 
 static void
 uart_putchar(int c, void *arg)
@@ -54,9 +62,24 @@ uart_putchar(int c, void *arg)
 	uart_16550_putc(sc, c);
 }
 
+static void
+clear_bss(void)
+{
+	uint8_t *sbss;
+	uint8_t *ebss;
+
+	sbss = (uint8_t *)&_sbss;
+	ebss = (uint8_t *)&_ebss;
+
+	while (sbss < ebss)
+		*sbss++ = 0;
+}
+
 void
 main(void)
 {
+
+	clear_bss();
 
 	md_init();
 
@@ -68,6 +91,12 @@ main(void)
 
 	__asm __volatile("ecall");
 
-	while (1)
+	e300g_clint_init(&clint_sc, CLINT_BASE);
+
+	intr_enable();
+
+	while (1) {
 		printf("Hello World\n");
+		usleep(1000000);
+	}
 }
