@@ -29,7 +29,10 @@ SECTIONS
 	} > imem
 
 	.bss : {
+		_sbss = ABSOLUTE(.);
 		*(.bss COMMON)
+		*(.sbss);
+		_ebss = ABSOLUTE(.);
 	} > imem
 
 	. = ALIGN(4);
