@@ -14,12 +14,14 @@ OBJECTS =	main.o						\
 		osfive/sys/kern/kern_panic.o			\
 		osfive/sys/kern/kern_sched.o			\
 		osfive/sys/kern/kern_timeout.o			\
-		osfive/sys/kern/subr_prf.o			\
 		osfive/sys/kern/subr_console.o			\
+		osfive/sys/kern/subr_prf.o			\
+		osfive/sys/kern/subr_usleep.o			\
 		osfive/sys/riscv/riscv/exception.o		\
 		osfive/sys/riscv/riscv/intr.o			\
 		osfive/sys/riscv/riscv/machdep.o		\
 		osfive/sys/riscv/riscv/trap.o			\
+		osfive/sys/riscv/sifive/e300g_clint.o		\
 		start.o
 
 LIBRARIES =	LIBC
