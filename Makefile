@@ -17,6 +17,7 @@ OBJECTS =	main.o						\
 		osfive/sys/kern/subr_prf.o			\
 		osfive/sys/kern/subr_console.o			\
 		osfive/sys/riscv/riscv/exception.o		\
+		osfive/sys/riscv/riscv/intr.o			\
 		osfive/sys/riscv/riscv/machdep.o		\
 		osfive/sys/riscv/riscv/trap.o			\
 		start.o
