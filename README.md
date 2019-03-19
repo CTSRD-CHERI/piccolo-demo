@@ -1,6 +1,6 @@
 # Government Furnished Equipment (GFE)
 
-This is a Hello World application for GFE P1 Processor (Bluespec Piccolo).
+This is a Hello World application for GFE P1 Processor (Bluespec Piccolo) synthesized on the Xilinx VCU118 Evaluation Kit.
 
 ### Build under Linux/FreeBSD
 
