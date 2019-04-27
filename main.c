@@ -32,7 +32,6 @@
 
 #include <machine/cpuregs.h>
 #include <machine/cpufunc.h>
-#include <machine/machdep.h>
 
 #include <dev/uart/uart_16550.h>
 #include <riscv/sifive/e300g_clint.h>
@@ -107,8 +106,8 @@ main(void)
 
 	e300g_clint_init(&clint_sc, CLINT_BASE);
 
-	thread_create("test", 10000, test_thr, (void *)1);
-	thread_create("test", 10000, test_thr, (void *)2);
+	thread_create("test", 1, 10000, 4096, test_thr, (void *)1);
+	thread_create("test", 1, 10000, 4096, test_thr, (void *)2);
 
 	intr_enable();
 

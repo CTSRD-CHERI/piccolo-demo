@@ -25,8 +25,13 @@ SECTIONS
 		*(.rodata)
 	} > imem
 
+	/* Ensure _smem is associated with the next section */
+	. = .;
+	_smem = ABSOLUTE(.);
 	.sdata : {
+		_sdata = ABSOLUTE(.);
 		*(.sdata)
+		_edata = ABSOLUTE(.);
 	} > imem
 
 	.bss : {
